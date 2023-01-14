@@ -1,15 +1,21 @@
+import styled from "styled-components";
+
 type AudioTrackProps = {
   name?: string;
   position: number;
-  trackUrl: string;
 };
 
-function AudioTrack({ name, position, trackUrl }: AudioTrackProps) {
+const AudioTrackLayout = styled.div`
+  padding: 0.5em 0.7em;
+  border: solid 1px gray;
+  margin-top: 0.4em;
+`;
+
+function AudioTrack({ name, position }: AudioTrackProps) {
   return (
-    <div>
+    <AudioTrackLayout>
       <span>{name || `Track ${position + 1}`}</span>
-      <audio src={trackUrl} />
-    </div>
+    </AudioTrackLayout>
   );
 }
 

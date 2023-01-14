@@ -1,18 +1,14 @@
 import AudioTrack from "./AudioTrack";
 
 type TrackListProps = {
-  audioTracks: string[];
+  audioTracks: HTMLAudioElement[];
 };
 
 function TrackList({ audioTracks }: TrackListProps) {
   return (
     <div id="track-list">
       {audioTracks.map((audioTrack, index) => (
-        <AudioTrack
-          key={`track-at-${index}`}
-          position={index}
-          trackUrl={audioTrack}
-        />
+        <AudioTrack key={audioTrack.id} position={index} />
       ))}
     </div>
   );

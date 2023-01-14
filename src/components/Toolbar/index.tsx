@@ -6,6 +6,7 @@ const DEFAULT_ICON_SIZE = 30;
 type ToolbarProps = {
   hasAudioTracks?: boolean;
   recordingStatus: boolean;
+  playingStatus: boolean;
   onStartRecording: () => void;
   onStopRecording: () => void;
   onPlayAllTracks: () => void;
@@ -14,9 +15,10 @@ type ToolbarProps = {
 function Toolbar({
   hasAudioTracks = false,
   recordingStatus,
+  playingStatus,
   onStartRecording,
   onStopRecording,
-  onPlayAllTracks
+  onPlayAllTracks,
 }: ToolbarProps) {
   return (
     <ToolbarLayout>
@@ -37,11 +39,14 @@ function Toolbar({
           disabled={!recordingStatus}
         />
       </ToolbarButton>
-      <ToolbarButton onClick={() => hasAudioTracks && onPlayAllTracks()}>
+      <ToolbarButton
+        blinking={playingStatus}
+        onClick={() => hasAudioTracks && onPlayAllTracks()}
+      >
         <ToolbarIcon
           as={TbPlayerPlay}
           size={DEFAULT_ICON_SIZE}
-          disabled={!hasAudioTracks}
+          disabled={!hasAudioTracks || playingStatus}
         />
       </ToolbarButton>
     </ToolbarLayout>

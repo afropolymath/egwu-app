@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import styled from "styled-components";
 
 import TrackList from "./TrackList";
@@ -14,31 +13,24 @@ const AudioRecorderLayout = styled.div`
 function AudioRecorder() {
   const {
     isRecording,
-    audioTrackUrls,
-    initializeMediaRecorder,
+    isPlaying,
+    audioTracks,
     startRecordingAudio,
     stopRecordingAudio,
-    playAllAudioTracks
+    playAllAudioTracks,
   } = useAudioRecorder();
-
-  useEffect(() => {
-    try {
-      initializeMediaRecorder();
-    } catch (err) {
-      console.error("Could not retrieve the required Audio permissions", err);
-    }
-  }, []);
 
   return (
     <AudioRecorderLayout>
       <Toolbar
-        hasAudioTracks={!!audioTrackUrls.length}
+        hasAudioTracks={!!audioTracks.length}
+        playingStatus={isPlaying}
         recordingStatus={isRecording}
         onPlayAllTracks={playAllAudioTracks}
         onStartRecording={startRecordingAudio}
         onStopRecording={stopRecordingAudio}
       />
-      <TrackList audioTracks={audioTrackUrls} />
+      <TrackList audioTracks={audioTracks} />
     </AudioRecorderLayout>
   );
 }
